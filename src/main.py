@@ -1,8 +1,8 @@
 from PIL import Image, ImageOps
 import os
 
-input_folder = os.path.join("Images", "Input")
-output_folder = os.path.join("Images", "Output")
+input_folder = os.path.join("../Images", "Input")
+output_folder = os.path.join("../Images", "Output")
 os.makedirs(output_folder, exist_ok=True)
 
 

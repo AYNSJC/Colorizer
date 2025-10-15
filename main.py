@@ -16,15 +16,20 @@ pixels_wheel_gray = wheel_gray.load()
 
 new_img = Image.new("RGB", (width, height))
 
+print("Process started...")
+print("Might take long for larger images")
+print(f"Width: {width}; Height: {height}")
 
+print("Preparing monochrome match...")
 gray_to_color = {}
 for y in range(w_height):
     for x in range(w_width):
         gray = pixels_wheel_gray[x, y]
-        if gray not in gray_to_color:  # store first match
+        if gray not in gray_to_color:
             gray_to_color[gray] = pixels_wheel_color[x, y]
 
 
+print("Preparing color match...")
 for y in range(height):
     for x in range(width):
         pixel = pixels_bwimg[x, y]
@@ -33,6 +38,8 @@ for y in range(height):
         else:
             new_img.putpixel((x, y), pixel)  # fallback if no match
 
+
+print("Preparing Images...")
 
 new_img.save("coloredImage.png")
 print("✅ Saved: coloredImage.png")

@@ -14,6 +14,7 @@ pixels_wheel_color = wheel_color.load()
 pixels_wheel_gray = wheel_gray.load()
 
 
+print("Preparing monochrome scale...")
 gray_to_color = {}
 for y in range(w_height):
     for x in range(w_width):
@@ -22,9 +23,10 @@ for y in range(w_height):
             gray_to_color[gray] = pixels_wheel_color[x, y]
 
 
+print("Preparing files for colorization...")
 for filename in os.listdir(input_folder):
     if not filename.lower().endswith((".png", ".jpg", ".jpeg")):
-        continue  # skip non-image files
+        continue
 
     # Load image
     bw_image = Image.open(os.path.join(input_folder, filename)).convert("RGB")
@@ -34,7 +36,7 @@ for filename in os.listdir(input_folder):
 
     new_img = Image.new("RGB", (width, height))
 
-    # Apply mapping
+    print(f"Coloring Image {filename}...")
     for y in range(height):
         for x in range(width):
             pixel = pixels_bwimg[x, y]
@@ -43,11 +45,11 @@ for filename in os.listdir(input_folder):
             else:
                 new_img.putpixel((x, y), pixel)
 
-    # Save colorized image
+
     colorized_path = os.path.join(output_folder, f"colored_{filename}")
     new_img.save(colorized_path)
 
-    # Save inverted image
+
     inverted_img = ImageOps.invert(new_img)
     inverted_path = os.path.join(output_folder, f"inverted_{filename}")
     inverted_img.save(inverted_path)

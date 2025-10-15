@@ -15,6 +15,7 @@ pixels_wheel_gray = wheel_gray.load()
 
 
 print("Preparing monochrome scale...")
+print()
 gray_to_color = {}
 for y in range(w_height):
     for x in range(w_width):
@@ -24,6 +25,7 @@ for y in range(w_height):
 
 
 print("Preparing files for colorization...")
+print()
 for filename in os.listdir(input_folder):
     if not filename.lower().endswith((".png", ".jpg", ".jpeg")):
         continue
@@ -37,6 +39,7 @@ for filename in os.listdir(input_folder):
     new_img = Image.new("RGB", (width, height))
 
     print(f"Coloring Image {filename}...")
+    print()
     for y in range(height):
         for x in range(width):
             pixel = pixels_bwimg[x, y]
